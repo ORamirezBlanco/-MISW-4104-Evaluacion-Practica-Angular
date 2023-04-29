@@ -1,0 +1,33 @@
+<div>
+  <table class="table">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Marca</th>
+        <th>Linea</th>
+        <th>Modelo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vehiculo of vehiculos">
+        <td>{{ vehiculo.id }}</td>
+        <td>{{ vehiculo.marca }}</td>
+        <td>{{ vehiculo.linea }}</td>
+        <td>{{ vehiculo.modelo }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="divTable">
+
+  <div class="divTableBody">
+    <div class="divTableRow" *ngFor="let marcas of contadorMarcas">
+      <div class="divTableCell">Total</div>
+      <div class="divTableCell">{{ marcas[0]}} :</div>
+      <div class="divTableCell">{{ marcas[1]}}</div>
+    </div>
+  </div>
+</div>
+
+
