@@ -60,7 +60,7 @@ describe('Service: Vehiculo', () => {
           faker.datatype.number(),
           faker.lorem.sentence(),
           faker.image.imageUrl()
-        ),
+        )
 
       ];
 
