@@ -37,8 +37,14 @@ module.exports = function (config) {
     colors: true, // colores en la salida de la consola
     logLevel: config.LOG_INFO,
 
-    // Configuración del navegador
-    browsers: ["ChromeHeadless"],
+    // Configuración del navegador para ejecutar en modo headless
+    browsers: ["ChromeHeadlessNoSandbox"],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: "ChromeHeadless",
+        flags: ["--no-sandbox", "--disable-gpu"],
+      },
+    },
 
     // Modo para detener el proceso cuando las pruebas terminan
     singleRun: true,
