@@ -15,11 +15,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "14"
-      - name: move directory
-        run: cd tu-segundazo
       - name: Install dependencies
+        working-directory: ./tu-segundazo
         run: npm install
       - name: Run tests
+        working-directory: ./tu-segundazo
         run: npm test
 
   sonarcloud:
