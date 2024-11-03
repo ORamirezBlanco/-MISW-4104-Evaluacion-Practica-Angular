@@ -1,11 +1,12 @@
 // karma.conf.js
+process.env.CHROME_BIN = require("puppeteer").executablePath();
 
 module.exports = function (config) {
   config.set({
     // Frameworks a utilizar
     frameworks: ["jasmine", "@angular-devkit/build-angular"],
 
-    // Patrones de archivos a observar, incluyendo todos los archivos `.spec.ts` en la aplicación
+    // Archivos de prueba (todos los archivos `.spec.ts`)
     files: [{ pattern: "./src/**/*.spec.ts", watched: false }],
 
     // Plugins necesarios para Karma
@@ -33,27 +34,37 @@ module.exports = function (config) {
     reporters: ["progress", "kjhtml"],
 
     // Configuración del servidor de Karma
-    port: 9876, // puerto del servidor
-    colors: true, // colores en la salida de la consola
+    port: 9876,
+    colors: true,
     logLevel: config.LOG_INFO,
 
-    // Configuración del navegador para ejecutar en modo headless
-    browsers: ["ChromeHeadlessNoSandbox"],
+    // Configuración de los navegadores
+    browsers: ["ChromeHeadlessCI"],
     customLaunchers: {
-      ChromeHeadlessNoSandbox: {
+      ChromeHeadlessCI: {
         base: "ChromeHeadless",
-        flags: ["--no-sandbox", "--disable-gpu"],
+        flags: [
+          "--no-sandbox", // Ejecuta sin sandbox para evitar restricciones en CI
+          "--disable-gpu", // Desactiva GPU (optimiza en entornos sin GUI)
+          "--enable-features=NetworkService",
+          "--disable-translate", // Desactiva traducción automática
+          "--disable-extensions", // Desactiva extensiones no necesarias
+          "--disable-background-timer-throttling", // Mejor manejo de timers en background
+          "--disable-backgrounding-occluded-windows",
+          "--remote-debugging-port=9222", // Habilita el puerto de debugging para errores detallados
+        ],
       },
     },
 
-    // Modo para detener el proceso cuando las pruebas terminan
+    // Modo de ejecución única en CI
     singleRun: true,
 
-    // Concurrency Level
+    // Niveles de concurrencia para entornos de CI (ajustable)
     concurrency: Infinity,
 
     // Configuración de tiempo de espera (opcional)
-    browserDisconnectTimeout: 10000, // Tiempo de espera para desconexión
-    browserNoActivityTimeout: 60000, // Tiempo de espera sin actividad
+    browserDisconnectTimeout: 10000,
+    browserNoActivityTimeout: 60000,
+    captureTimeout: 120000, // Extiende tiempo de captura en CI (recomendado para evitar desconexiones)
   });
 };
