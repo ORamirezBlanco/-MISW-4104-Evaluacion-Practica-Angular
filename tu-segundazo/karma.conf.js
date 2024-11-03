@@ -23,6 +23,8 @@ module.exports = function (config) {
     autoWatch: true,
     singleRun: true, // Cambia a false si quieres que siga corriendo
     concurrency: Infinity,
+    captureTimeout: 120000, // 2 minutos
+    browserNoActivityTimeout: 120000, // 2 minutos
     browsers: ["ChromeHeadless"], // Asegúrate de usar ChromeHeadless
     customLaunchers: {
       ChromeHeadless: {
