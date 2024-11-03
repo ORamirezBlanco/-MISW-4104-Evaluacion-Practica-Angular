@@ -6,12 +6,9 @@ module.exports = function (config) {
   config.set({
     basePath: "",
     frameworks: ["jasmine", "@angular-devkit/build-angular"],
-    files: [
-      // Tus archivos de pruebas aquí
-      { pattern: "./src/**/*.spec.ts", watched: false },
-    ],
+    files: [{ pattern: "./src/**/*.spec.ts", watched: false }],
     preprocessors: {
-      "./src/**/*.spec.ts": ["coverage"], // Si estás generando cobertura
+      "./src/**/*.spec.ts": ["coverage"], // Solo si estás generando cobertura
     },
     plugins: [
       "karma-jasmine",
@@ -26,7 +23,7 @@ module.exports = function (config) {
     autoWatch: true,
     singleRun: true, // Cambia a false si quieres que siga corriendo
     concurrency: Infinity,
-    browsers: ["ChromeHeadless"],
+    browsers: ["ChromeHeadless"], // Asegúrate de usar ChromeHeadless
     customLaunchers: {
       ChromeHeadless: {
         base: "ChromeHeadless",
