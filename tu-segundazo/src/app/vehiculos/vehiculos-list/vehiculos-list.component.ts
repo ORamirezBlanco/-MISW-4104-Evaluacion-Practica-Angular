@@ -29,22 +29,7 @@ export class VehiculosListComponent implements OnInit {
       console.log(this.contadorMarcas);
     });
   }
-  getVehiculoss(): void {
-    this.vehiculoService.getVehiculos().subscribe((vehiculos) => {
-      this.vehiculos = vehiculos;
 
-      this.contadorMarcas = vehiculos.reduce(function (obj: any = {}, pet) {
-        if (!obj[pet.marca]) {
-          obj[pet.marca] = 1;
-        } else {
-          obj[pet.marca]++;
-        }
-        return obj;
-      }, {});
-      this.contadorMarcas = Object.entries(this.contadorMarcas);
-      console.log(this.contadorMarcas);
-    });
-  }
   ngOnInit() {
     this.getVehiculos();
   }
