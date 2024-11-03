@@ -6,6 +6,20 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
